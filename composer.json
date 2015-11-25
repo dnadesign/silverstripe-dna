@@ -1,5 +1,5 @@
 {
-    "name": "dnadesign/dna_silverstripe",
+    "name": "dnadesign/silverstripe-dna",
     "type": "silverstripe-module",
     "require": {
         "silverstripe/raygun": "dev-master",
