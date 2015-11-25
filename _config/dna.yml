@@ -4,6 +4,7 @@ Name: dnaraygun
 Injector:
   RaygunLogWriter:
     class: DnaRaygunLogWriter
+RaygunLogWriter:
   level: 'SS_Log::WARNING'
 EnvironmentCheckSuite:
   registered_checks:
