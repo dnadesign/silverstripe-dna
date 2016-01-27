@@ -4,7 +4,7 @@
     "require": {
         "silverstripe/raygun": "dev-master",
         "dnadesign/silverstripe-signature": "dev-master",
-        "silverstripe/environmentcheck": "1.1.1"
+        "silverstripe/environmentcheck": ">=1.1.1"
     },
     "extra": {
         "installer-name": "dna"
