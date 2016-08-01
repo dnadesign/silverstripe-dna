@@ -29,7 +29,7 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 
 		$message['errstr'] = sprintf("[%s] %s",
 			$appName,
-			$message['message']['errstr']
+			$message['errstr']
 		);
 
 		$ex = new ReportedException($message);
