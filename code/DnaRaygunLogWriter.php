@@ -15,7 +15,7 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 			return false;
 		}
 
-		if(in_array($exception->getMessage(), $this->ignored_exceptions)) {
+		if ($this->is_message_blocked($exception->getMessage(), 'exceptions')) {
 			return false;
 		}
 
@@ -42,7 +42,7 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 			return false;
 		}
 
-		if(in_array($errstr, $this->ignored_errors)) {
+		if ($this->is_message_blocked($exception->getMessage(), 'errors')) {
 			return false;
 		}
 
@@ -51,7 +51,38 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 			$appName,
 			$errstr
 		);
+
 		parent::error_handler($errno, $errstr, $errfile, $errline, $tags);
+	}
+
+	function is_message_blocked($message, $type = 'exceptions') {
+		$blocked = false;
+		$collection = $this->get_ignored_messages($type);
+		foreach($collection as $blocked_message) {
+			if (strpos($message, $blocked_message) !== false ) {
+				$blocked = true;
+				break;
+			}
+		}
+
+		return $blocked;
+	}
+
+	function get_ignored_messages($type) {
+		$config = Config::inst()->get('DnaRaygunLogWriter','ignored_'.$type );
+		$collections = array();
+		$ignored_type = 'ignored_'.$type;
+
+		if ($config && is_array($config)) {
+			if (is_array($config)) {
+				 $collections = array_merge($config, $this->$ignored_type);
+			} else if (is_string($config)) {
+				$collection = $this->$ignored_type;
+				array_push($collection, $config);
+			}
+		}
+
+		return $collections;
 	}
 }
 
