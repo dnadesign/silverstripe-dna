@@ -69,9 +69,9 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 	}
 
 	function get_ignored_messages($type) {
-		$config = Config::inst()->get('DnaRaygunLogWriter','ignored_'.$type );
-		$collections = array();
 		$ignored_type = 'ignored_'.$type;
+		$config = Config::inst()->get('DnaRaygunLogWriter', $ignored_type );
+		$collections = array();		
 
 		if ($config && is_array($config)) {
 			if (is_array($config)) {
