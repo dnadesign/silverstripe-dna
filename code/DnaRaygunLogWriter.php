@@ -42,7 +42,7 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 			return false;
 		}
 
-		if ($this->is_message_blocked($exception->getMessage(), 'errors')) {
+		if ($this->is_message_blocked($errstr, 'errors')) {
 			return false;
 		}
 
