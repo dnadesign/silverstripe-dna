@@ -2,9 +2,9 @@
     "name": "dnadesign/silverstripe-dna",
     "type": "silverstripe-module",
     "require": {
-	"silverstripe/raygun": "~1.1.0",
-        "dnadesign/silverstripe-signature": "~1.0.0",
-        "silverstripe/environmentcheck": "~1.3.0"
+		"silverstripe/raygun": "dev-master",
+        "dnadesign/silverstripe-signature": "dev-master",
+        "silverstripe/environmentcheck": "dev-master"
     },
     "extra": {
         "installer-name": "dna"
