@@ -1,12 +1,16 @@
 ---
 Name: dnaraygun
 ---
-Injector:
-  RaygunLogWriter:
-    class: DnaRaygunLogWriter
-RaygunLogWriter:
-  level: 'SS_Log::WARNING'
-EnvironmentCheckSuite:
+SilverStripe\Core\Injector\Injector:
+  Psr\Log\LoggerInterface:
+    calls:
+      - [ pushHandler, [ %$DNA\DNARaygun\RaygunHandler ]]
+  DNA\DNARaygun\RaygunHandler:
+    constructor:
+      RaygunClient: %$Raygun4php\RaygunClient
+      level: 'error'
+
+SilverStripe\EnvironmentCheck\EnvironmentCheckSuite:
   registered_checks:
     db:
       definition: 'DatabaseCheck("Page")'
