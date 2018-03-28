@@ -1,8 +1,8 @@
 {
     "name": "dnadesign/silverstripe-dna",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "require": {
-		"silverstripe/raygun": "dev-master",
+	"silverstripe/raygun": "dev-master",
         "dnadesign/silverstripe-signature": "dev-master",
         "silverstripe/environmentcheck": "dev-master"
     },
