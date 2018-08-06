@@ -4,12 +4,6 @@ require_once 'Zend/Log/Writer/Abstract.php';
 
 class DnaRaygunLogWriter extends RaygunLogWriter {
 
-	private $ignored_errors = array(
-		'Broken jobs were found in the job queue'
-	);
-
-	private $ignored_exceptions = array();
-
 	function exception_handler($exception) {
 		if (Director::isDev()) {
 			return false;
@@ -70,19 +64,18 @@ class DnaRaygunLogWriter extends RaygunLogWriter {
 
 	function get_ignored_messages($type) {
 		$ignored_type = 'ignored_'.$type;
-		$config = Config::inst()->get('DnaRaygunLogWriter', $ignored_type );
-		$collections = array();		
+		$config = Config::inst()->get('DnaRaygunLogWriter', $ignored_type);
+		$collection = array();
 
-		if ($config && is_array($config)) {
+		if ($config) {
 			if (is_array($config)) {
-				 $collections = array_merge($config, $this->$ignored_type);
+				$collection = $config;
 			} else if (is_string($config)) {
-				$collection = $this->$ignored_type;
 				array_push($collection, $config);
 			}
 		}
-
-		return $collections;
+		
+		return $collection;
 	}
 }
 
