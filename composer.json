@@ -2,7 +2,7 @@
     "name": "dnadesign/silverstripe-dna",
     "type": "silverstripe-vendormodule",
     "require": {
-	"silverstripe/raygun": "dev-master",
+	"silverstripe/raygun": "2.0.0-rc",
         "dnadesign/silverstripe-signature": "dev-master",
         "silverstripe/environmentcheck": "dev-master"
     },
