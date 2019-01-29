@@ -27,22 +27,26 @@ class RaygunHandler extends SSRaygunHandler {
             return false;
         }
 
-        $message = sprintf("[%s] %s",
-            self::config()->app_name,
-            $record['message']
-        );
+        try {
+            $message = sprintf("[%s] %s",
+                self::config()->app_name,
+                $record['message']
+            );
 
-        $context = $record['context'];
+            $context = $record['context'];
 
-        $this->client->SendError(
-            0,
-            $message,
-            $context['file'],
-            $context['line'],
-            $tags,
-            $customData,
-            $timestamp
-        );
+            $this->client->SendError(
+                0,
+                $message,
+                $context['file'],
+                $context['line'],
+                $tags,
+                $customData,
+                $timestamp
+            );
+        } catch (Exception $e) {
+            // raygun exception.
+        }
     }
 
     /**
@@ -57,22 +61,26 @@ class RaygunHandler extends SSRaygunHandler {
             return false;
         }
 
-        $exception = $record['context']['exception'];
+        try {
+            $exception = $record['context']['exception'];
 
-        $message = array();
-        $message['errstr'] = $exception->getMessage();
-        $message['errno'] = $exception->getCode();
-        $message['errcontext'] = $exception->getTrace();
-        $message['errfile'] = $exception->getFile();
-        $message['errline'] = $exception->getLine();
-        $message['errstr'] = sprintf("[%s] %s",
-            self::config()->app_name,
-            $message['errstr']
-        );
+            $message = array();
+            $message['errstr'] = $exception->getMessage();
+            $message['errno'] = $exception->getCode();
+            $message['errcontext'] = $exception->getTrace();
+            $message['errfile'] = $exception->getFile();
+            $message['errline'] = $exception->getLine();
+            $message['errstr'] = sprintf("[%s] %s",
+                self::config()->app_name,
+                $message['errstr']
+            );
 
-        $reportedException = new ReportedException($message);
+            $reportedException = new ReportedException($message);
 
-        $this->client->SendException($reportedException, $tags, $customData, $timestamp);
+            $this->client->SendException($reportedException, $tags, $customData, $timestamp);
+        } catch (Exception $e) {
+            // raygun exception
+        }
     }
 
 }
